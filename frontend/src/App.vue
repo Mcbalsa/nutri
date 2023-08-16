@@ -1,47 +1,85 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <div>
+    <nav>
+      <div class="nav nav-tabs justify-content-end mb-4" role="tablist">
+        <a class="nav-item nav-link" data-toggle="tab" @click="console.log('food')"
+        role="tab">Food</a>
+        <a class="nav-item nav-link" data-toggle="tab" @click="console.log('exersice')"
+        role="tab">Exercise</a>
+        <a class="nav-item nav-link" data-toggle="tab" @click="console.log('logging in')"
+        role="tab">Log In</a>
+        
+      </div>
+    </nav>
+    <router-view/>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+
+<script setup>
+import { useRouter } from 'vue-router';
+
+
+
+
+const router = useRouter();
+
+
+
+function doRoute(whereTo) {
+  switch (whereTo) {
+    
+    case 'HelloWorld':
+      router.push('/hello');
+      break;
+      
+    default:
+      router.push('/');
+  }
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+
+</script>
+
+<!-- <script>
+export default {
+  components: {
+    AppBar
+  }
+}
+</script> -->
+
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 40px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+a {
+  cursor: pointer;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+.p-dialog-title {
+  margin: 0 auto;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.p-speeddial {
+  position: relative !important;
+}
+
+.p-speeddial-button.p-button {
+  margin-top: 5px;
+  width: 50px !important;
+  height: 50px !important;
+}
+
+#cart {
+  width: 50%;
+  margin: 0 auto;
 }
 </style>
