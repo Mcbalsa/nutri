@@ -20,8 +20,6 @@
 import { useRouter } from 'vue-router';
 
 
-
-
 const router = useRouter();
 
 
@@ -41,13 +39,7 @@ function doRoute(whereTo) {
 
 </script>
 
-<!-- <script>
-export default {
-  components: {
-    AppBar
-  }
-}
-</script> -->
+
 
 
 <style>
