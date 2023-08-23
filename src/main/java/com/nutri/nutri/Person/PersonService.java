@@ -10,4 +10,5 @@ public interface PersonService {
     Person updatePerson(Person person);
     List<Person> getAllPerson();
     Boolean deleteById(String id);
+    Person login(Person person);
 }

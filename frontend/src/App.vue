@@ -6,23 +6,59 @@
         role="tab">Food</a>
         <a class="nav-item nav-link" data-toggle="tab" @click="console.log('exersice')"
         role="tab">Exercise</a>
-        <a class="nav-item nav-link" data-toggle="tab" @click="console.log('logging in')"
+        <a v-if="global.userState.person == null" class="nav-item nav-link" data-toggle="tab" @click="login()"
         role="tab">Log In</a>
-        
+        <a v-if="global.userState.person != null" class="nav-item nav-link" data-toggle="tab" @click="logout()"
+        role="tab">Log Out</a>
       </div>
     </nav>
     <router-view/>
   </div>
 </template>
 
-
 <script setup>
+import global from '@/global';
+import { useDialog } from 'primevue/usedialog';
+import { onMounted, provide } from 'vue';
 import { useRouter } from 'vue-router';
-
+import Login from './components/Login.vue';
 
 const router = useRouter();
+const dialog = useDialog();
+provide('dialog', dialog);
+provide('global', global);
 
 
+onMounted(() => {
+  console.log(global.userState.person)
+});
+
+function login() {
+  dialog.open(Login, {
+        props: {
+            header: 'Login',
+            style: {
+                width: '40vw',
+            },
+            breakpoints: {
+                '960px': '75vw',
+                '640px': '90vw'
+            },
+            modal: true,
+        },
+        onClose: (options) => {
+            const data = options.data;
+            if (data) {
+                toast.add({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
+            }
+        }
+    });
+}
+
+function logout() {
+  global.methods.logout();
+  router.push('/')
+}
 
 function doRoute(whereTo) {
   switch (whereTo) {
@@ -30,7 +66,9 @@ function doRoute(whereTo) {
     case 'HelloWorld':
       router.push('/hello');
       break;
-      
+    case 'ProfilePage':
+      router.push('/profile')
+      break;
     default:
       router.push('/');
   }
