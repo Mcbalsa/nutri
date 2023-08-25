@@ -2,6 +2,8 @@
     <div>
     <nav>
       <div class="nav nav-tabs justify-content-end mb-4" role="tablist">
+        <a v-if="isAdmin()" class="nav-item nav-link" data-toggle="tab" @click="doRoute('AdminPage')"
+        role="tab">Admin</a>
         <a class="nav-item nav-link" data-toggle="tab" @click="console.log('food')"
         role="tab">Food</a>
         <a class="nav-item nav-link" data-toggle="tab" @click="console.log('exersice')"
@@ -30,7 +32,6 @@ provide('global', global);
 
 
 onMounted(() => {
-  console.log(global.userState.person)
 });
 
 function login() {
@@ -46,18 +47,29 @@ function login() {
             },
             modal: true,
         },
-        onClose: (options) => {
-            const data = options.data;
-            if (data) {
-                toast.add({ severity: 'success', summary: 'Success Message', detail: 'Message Content', life: 3000 });
-            }
+        onClose: () => {
+          console.log(isAdmin());
+          if(isAdmin() == true) {
+    
+            router.push('/admin')
+          }
+          else {
+            console.log("User")
+            router.push('/profile');
+          }
         }
     });
 }
 
 function logout() {
+
   global.methods.logout();
+
   router.push('/')
+}
+
+function isAdmin() {
+  return global.userState.person !== null && global.userState.person.role === 'ADMIN'
 }
 
 function doRoute(whereTo) {
@@ -68,6 +80,9 @@ function doRoute(whereTo) {
       break;
     case 'ProfilePage':
       router.push('/profile')
+      break;
+    case 'AdminPage':
+      router.push('/admin')
       break;
     default:
       router.push('/');

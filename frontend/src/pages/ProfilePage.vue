@@ -12,7 +12,7 @@ provide('global', global);
 
 
 onMounted(() => {
-    console.log(global.userState.person)
+    
 });
 
 </script>

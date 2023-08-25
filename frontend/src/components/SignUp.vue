@@ -71,7 +71,6 @@ async function createAccount(e) {
             type: 'post',
             data: JSON.stringify(person),
             success: () => {
-                console.log("Added")
                 state.username = "";
                 state.password = "";
                 state.height = 0;
