@@ -49,7 +49,7 @@ async function login(e) {
     await global.methods.login(person).catch(() => {
     });
     dialogRef.value.close();
-    router.push('/profile');
+
 }
 
 </script>
