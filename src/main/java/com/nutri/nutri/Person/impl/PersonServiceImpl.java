@@ -30,6 +30,8 @@ public class PersonServiceImpl implements PersonService {
                         .Role(person.getRole())
                         .height(person.getHeight())
                         .weight(person.getWeight())
+                        .foodJournal(person.getFoodJournal())
+                        .foodJournal(null)
                         .build()
 
         );
@@ -44,6 +46,7 @@ public class PersonServiceImpl implements PersonService {
         existingPerson.get().setPassword(person.getPassword());
         existingPerson.get().setHeight(person.getHeight());
         existingPerson.get().setWeight(person.getWeight());
+        existingPerson.get().setFoodJournal(person.getFoodJournal());
         return personRepository.save(existingPerson.get());
     }
 
@@ -64,14 +67,10 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person login(Person person) {
-        Optional<Person> existingPerson = personRepository.findByusername(person.getUsername());
-        if(existingPerson.isEmpty())
-            throw new RuntimeException(String.format("No person found for username %s",person.getUsername()));
-        if(!existingPerson.get().getPassword().matches(person.getPassword())) {
-            throw new RuntimeException(String.format("Password is incorrect"));
-        }
-        
-        return personRepository.save(existingPerson.get());
-        }
+    public Person getPersonByUsername(String username) {
+        Optional<Person> existingPerson = personRepository.findByusername(username);
+        if (existingPerson.isEmpty())
+            throw new RuntimeException(String.format("No person found for username %s", username));
+        return existingPerson.get();
+    }
 }

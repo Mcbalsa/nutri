@@ -1,7 +1,7 @@
 <template>
     <div>
         <div style="width: 90%; margin: 0 auto;">
-            <DataTable :value="global.food.value" paginator :rows="5" :rowsPerPageOption="[5, 10, 20, 50]"
+            <DataTable :value="store.food.value" paginator :rows="5" :rowsPerPageOption="[5, 10, 20, 50]"
             @rowSelect="onRowSelect"  selectionMode="single" dataKey="id" :metaKeySelection="false" tableStyle="min-width: 50rem">
                 <Column field="name" header="Name" style="width: 25%"></Column>>
                 <Column field="protein" header="Protein" style="width: 25%"></Column>>
@@ -23,12 +23,12 @@ import { useDialog } from 'primevue/usedialog';
 import { inject, onMounted, provide } from 'vue';
 import FoodDetails from '../components/FoodDetails.vue';
 
-const global = inject('global')
+const store = inject('store')
 const dialog = useDialog();
 provide('dialog', dialog);
 
 onMounted(() => {
-    global.methods.loadFood();
+    store.methods.loadFood();
 })
 
 function addFood() {

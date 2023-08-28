@@ -29,27 +29,18 @@ const state = reactive({
     password: ""
 });
 
-const global = inject('global');
+const store = inject('store');
 const dialogRef = inject("dialogRef");
 
 async function login(e) {
     let username = document.getElementById('username');
     let password = document.getElementById('password');
-    
-    const person = {
-        'id' : "string",
-        "username": state.username,
-        "password": state.password,
-        "height": 0,
-        "weight": 0,
-        "role": "USER"
-        
-    }
-    e.preventDefault();
-    await global.methods.login(person).catch(() => {
-    });
-    dialogRef.value.close();
 
+
+    e.preventDefault();
+    await store.methods.login(state.username, state.password).catch(() => {
+    });
+    
 }
 
 </script>

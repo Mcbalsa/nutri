@@ -36,7 +36,7 @@ import { inject, reactive } from 'vue';
 import Food from '../global/Food.js';
 
 const dialogRef = inject('dialogRef');
-const global = inject('global')
+const store = inject('store')
 const state = reactive({
     Food
 });
@@ -52,7 +52,7 @@ async function addFood() {
         method: 'post',
         data: JSON.stringify(state)
     }).done(() => {
-        global.methods.loadFood();
+        store.methods.loadFood();
         dialogRef.value.close();
     });
     
