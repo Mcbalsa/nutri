@@ -5,5 +5,6 @@ export default class Person {
         this.weight = 0
         this.height = 0
         this.role = ""
+        this.foodJournal = []
     }
 }

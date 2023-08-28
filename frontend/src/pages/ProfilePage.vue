@@ -5,10 +5,10 @@
 </template>
 
 <script setup>
-import global from '@/global';
+import store from '@/store';
 import { onMounted, provide } from 'vue';
 
-provide('global', global);
+provide('store', store);
 
 
 onMounted(() => {

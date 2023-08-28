@@ -8,9 +8,9 @@
         role="tab">Food</a>
         <a class="nav-item nav-link" data-toggle="tab" @click="console.log('exersice')"
         role="tab">Exercise</a>
-        <a v-if="global.userState.person == null" class="nav-item nav-link" data-toggle="tab" @click="login()"
+        <a v-if="store.userState.person == null" class="nav-item nav-link" data-toggle="tab" @click="login()"
         role="tab">Log In</a>
-        <a v-if="global.userState.person != null" class="nav-item nav-link" data-toggle="tab" @click="logout()"
+        <a v-if="store.userState.person != null" class="nav-item nav-link" data-toggle="tab" @click="logout()"
         role="tab">Log Out</a>
       </div>
     </nav>
@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import global from '@/global';
+import store from '@/store';
 import { useDialog } from 'primevue/usedialog';
 import { onMounted, provide } from 'vue';
 import { useRouter } from 'vue-router';
@@ -28,7 +28,7 @@ import Login from './components/Login.vue';
 const router = useRouter();
 const dialog = useDialog();
 provide('dialog', dialog);
-provide('global', global);
+provide('store', store);
 
 
 onMounted(() => {
@@ -48,13 +48,11 @@ function login() {
             modal: true,
         },
         onClose: () => {
-          console.log(isAdmin());
           if(isAdmin() == true) {
     
             router.push('/admin')
           }
           else {
-            console.log("User")
             router.push('/profile');
           }
         }
@@ -63,13 +61,13 @@ function login() {
 
 function logout() {
 
-  global.methods.logout();
+  store.methods.logout();
 
   router.push('/')
 }
 
 function isAdmin() {
-  return global.userState.person !== null && global.userState.person.role === 'ADMIN'
+  return store.userState.person !== null && store.userState.person.role === 'ADMIN'
 }
 
 function doRoute(whereTo) {

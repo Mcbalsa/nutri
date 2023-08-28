@@ -8,16 +8,15 @@ const userState = reactive({
 });
 
 const methods = {
-  async login(person) {
-    console.log(person);
+  // Only check the username for now, implement a more sophisticated login later.
+  async login(username, password) {
     await $.ajax({
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
       },
-      url: "http://localhost:8080/api/v1/Person/Login",
-      type: "post",
-      data: JSON.stringify(person),
+      url: "http://localhost:8080/api/v1/Person/GetByUsername?username=" + username,
+      type: "get",
       success: (data) => {
         userState.person = data;
         sessionStorage.setItem("person", JSON.stringify(userState.person));

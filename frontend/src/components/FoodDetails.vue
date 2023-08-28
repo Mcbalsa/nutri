@@ -35,7 +35,7 @@ import $ from 'jquery';
 import Button from 'primevue/button';
 import { inject, reactive } from 'vue';
 const dialogRef = inject('dialogRef');
-const global = inject('global');
+const store = inject('store');
 
 const state = reactive(dialogRef.value.data.Food);
 
@@ -47,10 +47,10 @@ async function editFood() {
             'Content-Type': 'application/json'
         },
         url: 'http://localhost:8080/api/v1/Food/Update',
-        method: 'post',
+        method: 'PUT',
         data: JSON.stringify(state)
     }).done(() => {
-        global.methods.loadFood();
+        store.methods.loadFood();
         dialogRef.value.close();
     });
 }
@@ -60,7 +60,7 @@ async function deleteFood() {
         url: 'http://localhost:8080/api/v1/Food/Delete?id=' + state.id,
         method: 'DELETE',
     }).done(() => {
-        global.methods.loadFood();
+        store.methods.loadFood();
         dialogRef.value.close();
     });
 }
