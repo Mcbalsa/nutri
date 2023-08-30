@@ -1,11 +1,10 @@
-package com.nutri.nutri.Food;
+package com.nutri.nutri.FoodJournalEntry;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,37 +18,29 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/v1/Food")
+@RequestMapping("/api/v1/FoodEntry")
 @RequiredArgsConstructor
-public class FoodController {
+public class FoodEntryController {
     @Autowired
-    FoodService foodService;
+    FoodEntryService foodEntryService;
 
-    @PostMapping("Food")
+    @PostMapping("FoodEntry")
     @ResponseStatus(HttpStatus.CREATED)
-    public Food createNew(@RequestBody Food food) {
-        return foodService.createNew(food);
+    public FoodEntry createNew(@RequestBody FoodEntry entry) {
+        return foodEntryService.createNew(entry);
     }
-
-    @GetMapping("GetAll")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Food> getAllFood() {
-        return foodService.getAllFood();
-    }
-
-    @DeleteMapping("Delete")
-    @ResponseStatus(HttpStatus.OK)
-    public boolean deleteById(@RequestParam String id) {
-        return foodService.deleteById(id);
-    }
-
+    
     @PutMapping("Update")
     @ResponseStatus(HttpStatus.OK)
-    public Food updateFood(@RequestBody Food food) {
-        return foodService.updateFood(food);
+    public FoodEntry updateFoodEntry(@RequestBody FoodEntry entry) {
+        return foodEntryService.updateEntry(entry);
     }
 
-    
+    @GetMapping("GetByUser")
+    @ResponseStatus(HttpStatus.OK)
+    public List<FoodEntry> GetByUser(@RequestParam String id) {
+        return foodEntryService.getByUser(id);
+    }
 
     
 

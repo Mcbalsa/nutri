@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AdminPage from "../pages/AdminPage.vue";
+import FoodJournalPage from "../pages/FoodJournalPage.vue";
 import HomePage from "../pages/HomePage.vue";
 import ProfilePage from "../pages/ProfilePage.vue";
 
@@ -18,6 +19,11 @@ const routes = [
     path: "/admin",
     name: "AdminPage",
     component: AdminPage,
+  },
+  {
+    path: "/food",
+    name: "FoodJournalPage",
+    component: FoodJournalPage,
   },
 ];
 

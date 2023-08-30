@@ -30,8 +30,6 @@ public class PersonServiceImpl implements PersonService {
                         .Role(person.getRole())
                         .height(person.getHeight())
                         .weight(person.getWeight())
-                        .foodJournal(person.getFoodJournal())
-                        .foodJournal(null)
                         .build()
 
         );
@@ -46,7 +44,6 @@ public class PersonServiceImpl implements PersonService {
         existingPerson.get().setPassword(person.getPassword());
         existingPerson.get().setHeight(person.getHeight());
         existingPerson.get().setWeight(person.getWeight());
-        existingPerson.get().setFoodJournal(person.getFoodJournal());
         return personRepository.save(existingPerson.get());
     }
 

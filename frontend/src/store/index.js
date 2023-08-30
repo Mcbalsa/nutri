@@ -3,6 +3,9 @@ import { reactive } from "vue";
 
 const food = reactive([]);
 
+const foodJournal = reactive([]);
+
+
 const userState = reactive({
   person: JSON.parse(sessionStorage.getItem("person")),
 });
@@ -37,11 +40,20 @@ const methods = {
     }).done(data => {
       food.value = data;
     })
+  },
+  async loadFoodJournal(id) {
+    await $.ajax({
+      url : "http://localhost:8080/api/v1/FoodEntry/GetByUser?id=" + id,
+      method: "get"
+    }).done(data => {
+      foodJournal.value = data;
+    })
   }
 };
 
 export default {
   userState,
   methods,
-  food
+  food,
+  foodJournal
 }

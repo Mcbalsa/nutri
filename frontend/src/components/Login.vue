@@ -40,7 +40,7 @@ async function login(e) {
     e.preventDefault();
     await store.methods.login(state.username, state.password).catch(() => {
     });
-    
+    dialogRef.value.close();
 }
 
 </script>
