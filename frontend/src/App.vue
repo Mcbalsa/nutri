@@ -4,7 +4,7 @@
       <div class="nav nav-tabs justify-content-end mb-4" role="tablist">
         <a v-if="isAdmin()" class="nav-item nav-link" data-toggle="tab" @click="doRoute('AdminPage')"
         role="tab">Admin</a>
-        <a class="nav-item nav-link" data-toggle="tab" @click="console.log('food')"
+        <a class="nav-item nav-link" data-toggle="tab" @click="console.log(doRoute('FoodJournalPage'))"
         role="tab">Food</a>
         <a class="nav-item nav-link" data-toggle="tab" @click="console.log('exersice')"
         role="tab">Exercise</a>
@@ -48,12 +48,13 @@ function login() {
             modal: true,
         },
         onClose: () => {
+          store.methods.loadFoodJournal(store.userState.person.id)
           if(isAdmin() == true) {
     
             router.push('/admin')
           }
           else {
-            router.push('/profile');
+            router.push('/food');
           }
         }
     });
@@ -81,6 +82,9 @@ function doRoute(whereTo) {
       break;
     case 'AdminPage':
       router.push('/admin')
+      break;
+    case 'FoodJournalPage':
+      router.push('/food')
       break;
     default:
       router.push('/');

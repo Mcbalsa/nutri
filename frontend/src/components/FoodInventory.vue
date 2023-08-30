@@ -48,7 +48,6 @@ function addFood() {
 }
 
 const onRowSelect = (event) => {
-    console.log(event.data)
     dialog.open(FoodDetails, {
         props: {
             header: 'Food Details',

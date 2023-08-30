@@ -1,6 +1,4 @@
-package com.nutri.nutri.Person;
-
-import org.springframework.data.mongodb.core.mapping.DBRef;
+package com.nutri.nutri.FoodJournalEntry;
 
 import com.nutri.nutri.Food.Food;
 
@@ -14,7 +12,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class FoodEntryData {
-    @DBRef
-    Food food;
-    int servingSize;
+    private Food food;
+    private int servingSize;
 }
