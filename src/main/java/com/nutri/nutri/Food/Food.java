@@ -21,4 +21,6 @@ public class Food {
     private int fat;
     private int protein;
     private int carbs;
+    private int servings;
+    
 }
