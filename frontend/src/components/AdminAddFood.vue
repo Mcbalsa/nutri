@@ -33,7 +33,7 @@
 import $ from 'jquery';
 import Button from 'primevue/button';
 import { inject, reactive } from 'vue';
-import Food from '../global/Food.js';
+import Food from '../store/Food.js';
 
 const dialogRef = inject('dialogRef');
 const store = inject('store')

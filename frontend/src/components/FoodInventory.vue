@@ -21,6 +21,7 @@ import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
 import { useDialog } from 'primevue/usedialog';
 import { inject, onMounted, provide } from 'vue';
+import AdminAddFood from '../components/AdminAddFood.vue';
 import FoodDetails from '../components/FoodDetails.vue';
 
 const store = inject('store')

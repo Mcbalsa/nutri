@@ -1,11 +1,13 @@
 package com.nutri.nutri.FoodJournalEntry;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+
+import com.nutri.nutri.Food.Food;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,9 +23,9 @@ public class FoodEntry {
     private String id;
     @Indexed
     @CreatedDate
-    private Date creationDate = new Date();
+    private LocalDate creationDate;
 
-    private List<FoodEntryData> foods;
+    private List<Food> foods;
     private int totalCarbs;
     private int totalFat;
     private int totalProtein;

@@ -1,5 +1,7 @@
 package com.nutri.nutri.FoodJournalEntry.impl;
 
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,7 @@ public class FoodEntryServiceImpl implements FoodEntryService {
     public FoodEntry createNew(FoodEntry entry) {
         return foodEntryRepository.save(
             FoodEntry.builder()
+                .creationDate(LocalDate.now())
                 .totalCarbs(entry.getTotalCarbs())
                 .totalFat(entry.getTotalFat())
                 .totalProtein(entry.getTotalProtein())
@@ -38,6 +41,8 @@ public class FoodEntryServiceImpl implements FoodEntryService {
     @Override
     public FoodEntry updateEntry(FoodEntry entry) {
         Optional <FoodEntry> existingEntry =  foodEntryRepository.findById(entry.getId());
+        if (existingEntry.isEmpty())
+            throw new RuntimeException(String.format("No entry found for id %s", entry.getId()));
         existingEntry.get().setTotalCarbs(entry.getTotalCarbs());
         existingEntry.get().setTotalFat(entry.getTotalFat());
         existingEntry.get().setTotalProtein(entry.getTotalProtein());
@@ -52,6 +57,26 @@ public class FoodEntryServiceImpl implements FoodEntryService {
 
         return journal;
     }
-    
-    
+
+    @Override
+    public FoodEntry getByDate(String id, String date) {
+        List<FoodEntry> journal = foodEntryRepository.findByUserId(id);
+        for (FoodEntry entry: journal) {
+            if (entry.getCreationDate().toString().equals(date)) {
+                return entry;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isPresent(String id, String date) {
+        List<FoodEntry> journal = foodEntryRepository.findByUserId(id);
+        for (FoodEntry entry: journal) {
+            if (entry.getCreationDate().toString().equals(date)) {
+                return Boolean.TRUE;
+            }
+        }
+        return Boolean.FALSE;
+    }
 }
