@@ -9,6 +9,9 @@ public interface FoodEntryService {
     FoodEntry createNew(FoodEntry entry);
     FoodEntry updateEntry(FoodEntry entry);
     List<FoodEntry> getByUser(String id);
+<<<<<<< Updated upstream
     FoodEntry getByDate(String id, String date);
+=======
+>>>>>>> Stashed changes
     boolean isPresent(String id, String date);
 }

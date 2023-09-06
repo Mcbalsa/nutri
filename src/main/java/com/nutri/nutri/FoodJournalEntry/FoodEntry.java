@@ -3,7 +3,6 @@ package com.nutri.nutri.FoodJournalEntry;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 
@@ -22,9 +21,15 @@ public class FoodEntry {
     @Id
     private String id;
     @Indexed
+<<<<<<< Updated upstream
     @CreatedDate
     private LocalDate creationDate;
 
+=======
+
+    private LocalDate creationDate;
+
+>>>>>>> Stashed changes
     private List<Food> foods;
     private int totalCarbs;
     private int totalFat;

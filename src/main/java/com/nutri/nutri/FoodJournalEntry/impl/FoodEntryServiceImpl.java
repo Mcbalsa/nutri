@@ -58,6 +58,7 @@ public class FoodEntryServiceImpl implements FoodEntryService {
         return journal;
     }
 
+<<<<<<< Updated upstream
     @Override
     public FoodEntry getByDate(String id, String date) {
         List<FoodEntry> journal = foodEntryRepository.findByUserId(id);
@@ -68,6 +69,8 @@ public class FoodEntryServiceImpl implements FoodEntryService {
         }
         return null;
     }
+=======
+>>>>>>> Stashed changes
 
     @Override
     public boolean isPresent(String id, String date) {

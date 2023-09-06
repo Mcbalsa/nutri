@@ -17,8 +17,15 @@ const methods = {
         "Content-Type": "application/json",
       },
       url:
+<<<<<<< Updated upstream
         "http://localhost:8080/api/v1/Person/GetByUsername?username=" +
         username,
+=======
+        "http://localhost:8080/api/v1/Person/Login?username=" +
+        username + 
+        "&password=" +
+        password,
+>>>>>>> Stashed changes
       type: "get",
       success: (data) => {
         userState.person = data;
@@ -31,7 +38,11 @@ const methods = {
   },
   logout() {
     userState.person = null;
+<<<<<<< Updated upstream
     foodJournal.value = null
+=======
+    foodJournal.value = null;
+>>>>>>> Stashed changes
     sessionStorage.removeItem("person");
   },
   async loadFood() {
@@ -58,8 +69,12 @@ const methods = {
       totalFat: 0,
       totalProtein: 0,
       userId: userState.person.id,
+<<<<<<< Updated upstream
       foods : [
       ],
+=======
+      foods: [],
+>>>>>>> Stashed changes
     }
     $.ajax({
       headers: {
@@ -102,7 +117,7 @@ const methods = {
         date,
       method: "get",
     }).done((data) => {
-      console.log(data);
+      console.log("is in journal", data);
       if (data === false) {
         this.addNewFoodJournalEntry();
       } else {
