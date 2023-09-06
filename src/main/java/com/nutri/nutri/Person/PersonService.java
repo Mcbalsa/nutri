@@ -11,4 +11,6 @@ public interface PersonService {
     List<Person> getAllPerson();
     Boolean deleteById(String id);
     Person getPersonByUsername(String username);
+    Boolean usernameExists(String username);
+    Person authenticateUser(String username, String password);
 }

@@ -1,18 +1,19 @@
 <template>
     <div>
-        <form class="col-lg-10 offset-lg-1">
-            <div class="row g-3 justify-content-center">
-                <div class="col-md-auto">
-                    <input id="username" v-model="state.username" placeholder="Username">
-                </div>
+        <form>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input id="username" class="form-control" v-model="state.username" placeholder="Username">
+
             </div>
-            <div class="row g-3 justify-content-center">
-                <div class="col-md-auto">
-                    <input id="password" v-model="state.password" placeholder="Password">
-                </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" v-model="state.password" placeholder="Password">
             </div>
         </form>
-        <Button type="submit" @click="login($event)" label="Log in"></Button>
+        <div>
+            <Button type="submit" @click="login($event)" label="Log in"></Button>
+        </div>
     </div>
 </template>
 
@@ -33,10 +34,6 @@ const store = inject('store');
 const dialogRef = inject("dialogRef");
 
 async function login(e) {
-    let username = document.getElementById('username');
-    let password = document.getElementById('password');
-
-
     e.preventDefault();
     await store.methods.login(state.username, state.password).catch(() => {
     });
@@ -44,3 +41,24 @@ async function login(e) {
 }
 
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+p.error {
+    color: red
+}
+
+.divider {
+    width: 100%;
+    height: 20px;
+    border-bottom: 1px solid black;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.divider-title {
+    font-size: 30px;
+    background-color: #FFF;
+}
+</style>

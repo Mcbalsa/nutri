@@ -1,24 +1,36 @@
 <template>
     <div>
-        <form class="col-lg-10 offset-lg-1">
-            <div class="row g-3 justify-content-center">
-                <div class="col-md-auto">
-                    <input id="username" v-model="state.username" placeholder="Username">
+        <form>
+            <div class="row g-3">
+                <div class="col">
+                    <label for="email" class="form-label">Email</label>
+                    <input id="email" class="form-control" v-model="state.email" placeholder="Email">
+                </div>
+                <div class="col">
+                    <label for="username" class="form-label">Username</label>
+                    <input id="username" class="form-control" v-model="state.username" placeholder="Username">
                 </div>
             </div>
-            <div class="row g-3 justify-content-center">
-                <div class="col-md-auto">
-                    <input id="password" v-model="state.password" placeholder="Password">
+            <div class="row g-3">
+                <div class="col">
+                    <label for="password" class="form-label">Password</label>
+                    <input id="password" type="password" class="form-control" v-model="state.password"
+                        placeholder="Password">
+                </div>
+                <div class="col">
+                    <label for="confirmPass" class="form-label">Confirm Password</label>
+                    <input id="confirmPass" type="password" class="form-control" v-model="state.confirmPass"
+                        placeholder="Password">
                 </div>
             </div>
-            <div class="row g-3 justify-content-center">
-                <div class="col-md-auto">
-                    <input id="height" v-model="state.height" placeholder="height in inches">
+            <div class="row g-3">
+                <div class="col">
+                    <label for="height" class="form-label">Height in inches</label>
+                    <input type="height" class="form-control" v-model="state.height" placeholder="Height">
                 </div>
-            </div>
-            <div class="row g-3 justify-content-center">
-                <div class="col-md-auto">
-                    <input id="weight" v-model="state.weight" placeholder="weight in pounds">
+                <div class="col">
+                    <label for="weight" class="form-label">Weight in pountds</label>
+                    <input type="weight" class="form-control" v-model="state.weight" placeholder="weight">
                 </div>
             </div>
         </form>
@@ -29,62 +41,79 @@
 <script setup>
 import $ from 'jquery';
 import Button from 'primevue/button';
-import { reactive } from 'vue';
-
-import { inject } from "vue";
+import { useToast } from 'primevue/usetoast';
+import { inject, reactive } from 'vue';
 
 const dialogRef = inject("dialogRef");
+const toast = useToast();
+const store = inject('store');
 
 const state = reactive({
+    "email": "",
     "username": "",
     "password": "",
+    "confirmPass": "",
     "height": 0,
     "weight": 0,
     "role": ""
 })
 
-async function createAccount(e) {
-    let username = document.getElementById('username');
-    let password = document.getElementById('password');
-    let height = document.getElementById("height");
-    let weight = document.getElementById('weight')
-
-    if (state.username === 'admin') {
-        state.role = 'ADMIN'
+function validatePassword() {
+    if (state.confirmPass === state.password) {
+        return true;
     } else {
-        state.role = "USER"
+        return false;
     }
+}
 
-    e.preventDefault();
-    const person = {
-        "username": state.username,
-        "password": state.password,
-        "height": state.height,
-        "weight": state.weight,
-        "role": state.role
+
+
+async function createAccount(e) {
+
+    const validPassword = validatePassword()
+    if (!validPassword) {
+        toast.add({ severity: 'error', summary: 'Password error', detail: 'Password does not match confirmation password', life: 3000 });
     }
-
-    $.ajax(
-        {
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            url: 'http://localhost:8080/api/v1/Person/Person',
-            type: 'post',
-            data: JSON.stringify(person),
-            success: () => {
-                state.username = "";
-                state.password = "";
-                state.height = 0;
-                state.weight = 0;
-                dialogRef.value.close();
-            },
-            error: (jqXHR) => {
-                if (jqXHR.status == 400)
-                    $("#msg2").show().delay(5000).fadeOut();
+    else {
+        console.log("is valid")
+            if (state.username === 'admin') {
+                state.role = 'ADMIN'
+            } else {
+                state.role = "USER"
             }
-        }
-    );
-    $("#msg3").show().delay(6000).fadeOut();
-    return;
+
+            e.preventDefault();
+            const person = {
+                "email": state.email,
+                "username": state.username,
+                "password": state.password,
+                "height": state.height,
+                "weight": state.weight,
+                "role": state.role
+            }
+
+            $.ajax(
+                {
+                    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                    url: 'http://localhost:8080/api/v1/Person/Person',
+                    type: 'post',
+                    data: JSON.stringify(person),
+                    success: () => {
+                        state.username = "";
+                        state.password = "";
+                        state.height = 0;
+                        state.weight = 0;
+                        dialogRef.value.close();
+                    },
+                    error: (jqXHR) => {
+                        // if (jqXHR.status == 400)
+
+                    }
+                }
+            );
+
+            return;
+    }
 }
 </script>
 

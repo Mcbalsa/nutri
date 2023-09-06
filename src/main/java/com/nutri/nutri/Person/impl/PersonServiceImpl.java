@@ -25,6 +25,7 @@ public class PersonServiceImpl implements PersonService {
     public Person createNew(Person person) {
         return personRepository.save(
                 Person.builder()
+                        .email(person.getEmail())
                         .username(person.getUsername())
                         .password(person.getPassword())
                         .Role(person.getRole())
@@ -44,6 +45,7 @@ public class PersonServiceImpl implements PersonService {
         existingPerson.get().setPassword(person.getPassword());
         existingPerson.get().setHeight(person.getHeight());
         existingPerson.get().setWeight(person.getWeight());
+        existingPerson.get().setEmail(person.getEmail());
         return personRepository.save(existingPerson.get());
     }
 
@@ -69,5 +71,28 @@ public class PersonServiceImpl implements PersonService {
         if (existingPerson.isEmpty())
             throw new RuntimeException(String.format("No person found for username %s", username));
         return existingPerson.get();
+    }
+
+    @Override
+    public Boolean usernameExists(String username) {
+        Optional<Person> existingPerson = personRepository.findByusername(username);
+        if (existingPerson.isEmpty())
+            return false;
+        return true;
+    }
+
+    @Override
+    public Person authenticateUser(String username, String password) {
+        Optional<Person> existingPerson = personRepository.findByusername(username);
+        if (existingPerson.isEmpty())
+            throw new RuntimeException(String.format("No person found for username %s", username));
+        if(authenticate(existingPerson, username, password)) {
+            return existingPerson.get();
+        }
+        return null;
+    }
+
+    private boolean authenticate(Optional<Person> person, String username, String password) {
+        return (person.get().getUsername().equals(username) && person.get().getPassword().equals(password));
     }
 }
