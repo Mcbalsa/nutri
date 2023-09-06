@@ -2,31 +2,26 @@ import $ from "jquery";
 import { reactive } from "vue";
 
 const food = reactive([]);
-
 const foodJournal = reactive([]);
-
 
 const userState = reactive({
   person: JSON.parse(sessionStorage.getItem("person")),
 });
 
 const methods = {
-  // Only check the username for now, implement a more sophisticated login later.
+  // Only checks the username for now, implement a more sophisticated login later.
   async login(username, password) {
     await $.ajax({
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
-<<<<<<< Updated upstream
-      url: "http://localhost:8080/api/v1/Person/GetByUsername?username=" + username,
-=======
       url:
         "http://localhost:8080/api/v1/Person/Login?username=" +
         username + 
         "&password=" +
         password,
->>>>>>> Stashed changes
+
       type: "get",
       success: (data) => {
         userState.person = data;
@@ -60,30 +55,23 @@ const methods = {
 
   logout() {
     userState.person = null;
-<<<<<<< Updated upstream
-=======
     foodJournal.value = null;
->>>>>>> Stashed changes
     sessionStorage.removeItem("person");
   },
   async loadFood() {
     await $.ajax({
       url: "http://localhost:8080/api/v1/Food/GetAll",
-      method: "get"
-    }).done(data => {
+      method: "get",
+    }).done((data) => {
       food.value = data;
-    })
+    });
   },
   async loadFoodJournal(id) {
     await $.ajax({
-      url : "http://localhost:8080/api/v1/FoodEntry/GetByUser?id=" + id,
-      method: "get"
-    }).done(data => {
+      url: "http://localhost:8080/api/v1/FoodEntry/GetByUser?id=" + id,
+      method: "get",
+    }).done((data) => {
       foodJournal.value = data;
-<<<<<<< Updated upstream
-    })
-  }
-=======
     });
   },
   // Make it take string of id of user and create it in the backend
@@ -96,6 +84,7 @@ const methods = {
       userId: userState.person.id,
       foods: [],
     };
+
     $.ajax({
       headers: {
         Accept: "application/json",
@@ -112,6 +101,7 @@ const methods = {
   },
   async updateFoodJournalEntry(entry) {
     console.log("The entry being updated", entry);
+
     $.ajax({
       headers: {
         Accept: "application/json",
@@ -143,12 +133,11 @@ const methods = {
       }
     });
   },
->>>>>>> Stashed changes
 };
 
 export default {
   userState,
   methods,
   food,
-  foodJournal
-}
+  foodJournal,
+};

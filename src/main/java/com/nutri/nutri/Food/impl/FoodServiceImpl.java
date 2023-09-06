@@ -29,6 +29,7 @@ public class FoodServiceImpl implements FoodService {
                         .fat(food.getFat())
                         .carbs(food.getCarbs())
                         .protein(food.getProtein())
+                        .servings(1)
                         .build()
 
         );

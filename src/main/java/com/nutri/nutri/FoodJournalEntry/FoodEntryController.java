@@ -42,6 +42,16 @@ public class FoodEntryController {
         return foodEntryService.getByUser(id);
     }
 
-    
+    @GetMapping("GetByDate")
+    @ResponseStatus(HttpStatus.OK)
+    public FoodEntry GetByDate(@RequestParam String id, @RequestParam String date) {
+        return foodEntryService.getByDate(id, date);
+    }
+
+    @GetMapping("isPresent")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean isPresent(@RequestParam String id, @RequestParam String date) {
+        return foodEntryService.isPresent(id, date);
+    }
 
 }

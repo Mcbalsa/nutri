@@ -4,7 +4,7 @@
       <div class="nav nav-tabs justify-content-end mb-4" role="tablist">
         <a v-if="isAdmin()" class="nav-item nav-link" data-toggle="tab" @click="doRoute('AdminPage')"
         role="tab">Admin</a>
-        <a class="nav-item nav-link" data-toggle="tab" @click="console.log(doRoute('FoodJournalPage'))"
+        <a class="nav-item nav-link" data-toggle="tab" @click="doRoute('FoodJournalPage')"
         role="tab">Food</a>
         <a class="nav-item nav-link" data-toggle="tab" @click="console.log('exersice')"
         role="tab">Exercise</a>
@@ -48,13 +48,15 @@ function login() {
             modal: true,
         },
         onClose: () => {
+          const clientDate = new Date().toLocaleString( 'sv', { timeZoneName: 'short' } ).slice(0,10)
+          store.methods.isInFoodJournal(store.userState.person.id, clientDate)
           store.methods.loadFoodJournal(store.userState.person.id)
           if(isAdmin() == true) {
     
             router.push('/admin')
           }
           else {
-            router.push('/food');
+            router.push('/profile');
           }
         }
     });
