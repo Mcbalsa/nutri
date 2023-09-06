@@ -53,5 +53,15 @@ public class PersonController {
     public Person getPersonByUsername(@RequestParam String username) {
         return personService.getPersonByUsername(username);
     }
+    @GetMapping("usernameExists")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean usernameExists(@RequestParam String username) {
+        return personService.usernameExists(username);
+    }
 
+    @GetMapping("Login")
+    @ResponseStatus(HttpStatus.OK)
+    public Person authenticateUser(@RequestParam String username,@RequestParam String password) {
+        return personService.authenticateUser(username, password);
+    }
 }

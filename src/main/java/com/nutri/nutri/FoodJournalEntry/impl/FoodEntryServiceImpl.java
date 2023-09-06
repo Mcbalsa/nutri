@@ -59,6 +59,7 @@ public class FoodEntryServiceImpl implements FoodEntryService {
     }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     @Override
     public FoodEntry getByDate(String id, String date) {
         List<FoodEntry> journal = foodEntryRepository.findByUserId(id);
@@ -69,6 +70,8 @@ public class FoodEntryServiceImpl implements FoodEntryService {
         }
         return null;
     }
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 
