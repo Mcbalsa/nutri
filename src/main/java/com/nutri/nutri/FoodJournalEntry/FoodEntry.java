@@ -21,15 +21,9 @@ public class FoodEntry {
     @Id
     private String id;
     @Indexed
-<<<<<<< Updated upstream
-    @CreatedDate
-    private LocalDate creationDate;
-
-=======
 
     private LocalDate creationDate;
 
->>>>>>> Stashed changes
     private List<Food> foods;
     private int totalCarbs;
     private int totalFat;
