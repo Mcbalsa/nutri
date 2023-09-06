@@ -17,8 +17,11 @@ const methods = {
         "Content-Type": "application/json",
       },
       url:
-        "http://localhost:8080/api/v1/Person/GetByUsername?username=" +
-        username,
+        "http://localhost:8080/api/v1/Person/Login?username=" +
+        username + 
+        "&password=" +
+        password,
+
       type: "get",
       success: (data) => {
         userState.person = data;
@@ -29,9 +32,30 @@ const methods = {
       },
     });
   },
+  async usernameAvailable(username) {
+    await $.ajax({
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      url:
+        "http://localhost:8080/api/v1/Person/usernameExists?username=" +
+        username,
+      type: "get",
+      success: (data) => {
+        console.log("The username data value", data);
+        return data
+        
+      },
+      error: (jqXHR) => {
+        if (jqXHR.status == 404) userState.person = null;
+      },
+    });
+  },
+
   logout() {
     userState.person = null;
-    foodJournal.value = null
+    foodJournal.value = null;
     sessionStorage.removeItem("person");
   },
   async loadFood() {
@@ -53,14 +77,14 @@ const methods = {
   // Make it take string of id of user and create it in the backend
   async addNewFoodJournalEntry() {
     const entry = {
-      creationDate : "",
+      creationDate: "",
       totalCarbs: 0,
       totalFat: 0,
       totalProtein: 0,
       userId: userState.person.id,
-      foods : [
-      ],
-    }
+      foods: [],
+    };
+
     $.ajax({
       headers: {
         Accept: "application/json",
@@ -76,7 +100,8 @@ const methods = {
     });
   },
   async updateFoodJournalEntry(entry) {
-    console.log("The entry being updated", entry)
+    console.log("The entry being updated", entry);
+
     $.ajax({
       headers: {
         Accept: "application/json",
@@ -91,7 +116,6 @@ const methods = {
       },
     });
   },
-
 
   async isInFoodJournal(id, date) {
     await $.ajax({
