@@ -17,8 +17,10 @@ const methods = {
         "Content-Type": "application/json",
       },
       url:
-        "http://localhost:8080/api/v1/Person/GetByUsername?username=" +
-        username,
+        "http://localhost:8080/api/v1/Person/Login?username=" +
+        username + 
+        "&password=" +
+        password,
       type: "get",
       success: (data) => {
         userState.person = data;
@@ -31,7 +33,7 @@ const methods = {
   },
   logout() {
     userState.person = null;
-    foodJournal.value = null
+    foodJournal.value = null;
     sessionStorage.removeItem("person");
   },
   async loadFood() {
@@ -58,8 +60,7 @@ const methods = {
       totalFat: 0,
       totalProtein: 0,
       userId: userState.person.id,
-      foods : [
-      ],
+      foods: [],
     }
     $.ajax({
       headers: {
@@ -102,7 +103,7 @@ const methods = {
         date,
       method: "get",
     }).done((data) => {
-      console.log(data);
+      console.log("is in journal", data);
       if (data === false) {
         this.addNewFoodJournalEntry();
       } else {
