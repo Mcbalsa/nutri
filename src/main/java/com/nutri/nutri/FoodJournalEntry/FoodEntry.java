@@ -3,7 +3,6 @@ package com.nutri.nutri.FoodJournalEntry;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 
@@ -22,7 +21,7 @@ public class FoodEntry {
     @Id
     private String id;
     @Indexed
-    @CreatedDate
+
     private LocalDate creationDate;
 
     private List<Food> foods;

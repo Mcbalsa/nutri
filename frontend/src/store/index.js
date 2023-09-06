@@ -83,8 +83,7 @@ const methods = {
       totalProtein: 0,
       userId: userState.person.id,
       foods: [],
-    };
-
+    }
     $.ajax({
       headers: {
         Accept: "application/json",
@@ -126,7 +125,7 @@ const methods = {
         date,
       method: "get",
     }).done((data) => {
-      console.log(data);
+      console.log("is in journal", data);
       if (data === false) {
         this.addNewFoodJournalEntry();
       } else {
