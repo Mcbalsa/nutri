@@ -48,6 +48,10 @@ function login() {
             modal: true,
         },
         onClose: () => {
+<<<<<<< Updated upstream
+=======
+          // YYYY-MM-DD
+>>>>>>> Stashed changes
           const clientDate = new Date().toLocaleString( 'sv', { timeZoneName: 'short' } ).slice(0,10)
           store.methods.isInFoodJournal(store.userState.person.id, clientDate)
           store.methods.loadFoodJournal(store.userState.person.id)

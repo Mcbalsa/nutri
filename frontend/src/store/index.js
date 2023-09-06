@@ -21,7 +21,6 @@ const methods = {
         username + 
         "&password=" +
         password,
-
       type: "get",
       success: (data) => {
         userState.person = data;

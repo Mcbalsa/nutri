@@ -40,7 +40,6 @@ async function login(e) {
     dialogRef.value.close();
 }
 
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

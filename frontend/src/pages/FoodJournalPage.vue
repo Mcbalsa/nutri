@@ -102,6 +102,7 @@ function addFood() {
     });
 }
 
+<<<<<<< Updated upstream
 function changeServing(serving) {
     dialog.open(Servings, {
         props: {
@@ -122,6 +123,9 @@ function changeServing(serving) {
         }
     });
 }
+=======
+
+>>>>>>> Stashed changes
 
 function deleteFood(index) {
     state[currentDay].totalCarbs -= state[currentDay].foods[index].carbs

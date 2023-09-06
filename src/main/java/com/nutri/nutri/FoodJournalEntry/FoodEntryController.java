@@ -42,11 +42,11 @@ public class FoodEntryController {
         return foodEntryService.getByUser(id);
     }
 
-  
     @GetMapping("isPresent")
     @ResponseStatus(HttpStatus.OK)
     public boolean isPresent(@RequestParam String id, @RequestParam String date) {
         return foodEntryService.isPresent(id, date);
     }
+    
 
 }
