@@ -75,6 +75,7 @@ const methods = {
   },
   // Make it take string of id of user and create it in the backend
   async addNewFoodJournalEntry() {
+    console.log("Adding new entry")
     const entry = {
       creationDate: "",
       totalCarbs: 0,

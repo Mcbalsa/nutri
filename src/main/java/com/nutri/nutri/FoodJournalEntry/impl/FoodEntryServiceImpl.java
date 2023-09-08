@@ -31,6 +31,7 @@ public class FoodEntryServiceImpl implements FoodEntryService {
                 .totalCarbs(entry.getTotalCarbs())
                 .totalFat(entry.getTotalFat())
                 .totalProtein(entry.getTotalProtein())
+                .totalCalories(entry.getTotalCalories())
                 .userId(entry.getUserId())
                 .foods(entry.getFoods())
                 .build()
@@ -46,6 +47,7 @@ public class FoodEntryServiceImpl implements FoodEntryService {
         existingEntry.get().setTotalCarbs(entry.getTotalCarbs());
         existingEntry.get().setTotalFat(entry.getTotalFat());
         existingEntry.get().setTotalProtein(entry.getTotalProtein());
+        existingEntry.get().setTotalCalories(entry.getTotalCalories());
         existingEntry.get().setFoods(entry.getFoods());
         return foodEntryRepository.save(existingEntry.get());
         
@@ -58,22 +60,6 @@ public class FoodEntryServiceImpl implements FoodEntryService {
         return journal;
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    @Override
-    public FoodEntry getByDate(String id, String date) {
-        List<FoodEntry> journal = foodEntryRepository.findByUserId(id);
-        for (FoodEntry entry: journal) {
-            if (entry.getCreationDate().toString().equals(date)) {
-                return entry;
-            }
-        }
-        return null;
-    }
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
     @Override
     public boolean isPresent(String id, String date) {

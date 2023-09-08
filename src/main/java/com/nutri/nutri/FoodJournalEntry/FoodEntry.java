@@ -25,6 +25,7 @@ public class FoodEntry {
     private LocalDate creationDate;
 
     private List<Food> foods;
+    private int totalCalories;
     private int totalCarbs;
     private int totalFat;
     private int totalProtein;
