@@ -29,7 +29,8 @@ public class FoodServiceImpl implements FoodService {
                         .fat(food.getFat())
                         .carbs(food.getCarbs())
                         .protein(food.getProtein())
-                        .servings(1)
+                        .calories(calcCalories(food.getFat(),food.getProtein(), food.getCarbs()))
+                        .servings(1.0f)
                         .build()
 
         );
@@ -44,6 +45,7 @@ public class FoodServiceImpl implements FoodService {
         existingFood.get().setCarbs(food.getCarbs());
         existingFood.get().setFat(food.getFat());
         existingFood.get().setProtein(food.getProtein());
+        existingFood.get().setCalories(calcCalories(food.getFat(),food.getProtein(), food.getCarbs()));
         return foodRepository.save(existingFood.get());
     }
 
@@ -62,5 +64,8 @@ public class FoodServiceImpl implements FoodService {
         return Boolean.FALSE;
     }
 
-   
+    // Based of Formula: Total calories in marcos = (grams of protein * 4) + (grams of fat * 9) + (grams of carbs * 4)
+    private int calcCalories(int fat, int protein, int carbs) {
+        return (fat * 9) + (protein * 4) + (carbs * 4);
+    }
 }

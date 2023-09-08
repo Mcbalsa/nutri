@@ -2,6 +2,7 @@ import './assets/main.css';
 
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'primeicons/primeicons.css';
 import PrimeVue from 'primevue/config';
 import ConfirmationService from 'primevue/confirmationservice';
 import ConfirmDialog from 'primevue/confirmdialog';
@@ -13,7 +14,8 @@ import ToastService from 'primevue/toastservice';
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import "/node_modules/primeflex/primeflex.css";
+
+
 
 const app = createApp(App)
 app.use(router);

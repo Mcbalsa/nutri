@@ -4,7 +4,6 @@
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input id="username" class="form-control" v-model="state.username" placeholder="Username">
-
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
