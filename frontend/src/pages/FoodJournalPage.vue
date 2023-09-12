@@ -1,8 +1,7 @@
 <template>
     <div>
         <div style="width: 90%; margin: 0 auto;">
-            <DataTable :value="state[currentDay].foods" paginator :rows="5" :rowsPerPageOption="[5, 10, 20, 50]"
-                tableStyle="min-width: 50rem">
+            <DataTable :value="state[currentDay].foods" tableStyle="min-width: 50rem">
                 <Column field="name" header="Name" style="width: 20%"></Column>
                 <Column field="servings" header="Servings" style="width: 20%"></Column>
                 <Column field="calories" header="Calories" style="width: 20%"></Column>
@@ -19,18 +18,21 @@
                     </template>
                 </Column>
             </DataTable>
-            <div>
-                <form class="col-lg-10 offset-lg-1">
-                    <div class="row g-3 justify-content-center">
-                        <div class="col-md-auto">
+            <div id="searchBar">
+                <div class="row g-3">
+                    <div class="col-auto">
+                        <form>
                             <input id="search" v-model="search" placeholder="Search Food">
-                        </div>
+                        </form>
                     </div>
-                </form>
-                <Button type="submit" label="Add food" @click="addFood()" />
+                    <div class="col-auto">
+                        <Button type="submit" icon="pi pi-search" severity="secondary" text rounded aria-label="Search"
+                            @click="addFood()" />
+                    </div>
+                </div>
             </div>
             <div>
-                <Button type="submit" label="Update journal" @click="updateEntry()" />
+                <Button id="update" type="submit" label="Update journal" @click="updateEntry()" />
             </div>
             <div id="macros" class="row g-3">
                 <div class="col-auto">
@@ -55,15 +57,15 @@
     </div>
 </template>
 
+<!-- Stores the days entry in state and then updates the state
+    to the backend when the user presses the update button -->
 <script setup>
-
 import Button from 'primevue/button';
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
 import { useDialog } from 'primevue/usedialog';
 import { inject, onMounted, provide, reactive } from 'vue';
 import FoodSearch from '../components/FoodSearch.vue';
-import Servings from '../components/Servings.vue';
 
 const store = inject('store')
 let search = "";
@@ -77,6 +79,7 @@ provide('dialog', dialog);
 
 
 onMounted(() => {
+    store.methods.loadFood()
     store.methods.loadFoodJournal(store.userState.person.id)
     console.log(state)
     console.log(state[currentDay])
@@ -120,6 +123,7 @@ function changeServings(food) {
         }
     });
 }
+
 
 function resetFood(food) {
     subFromTotal(food)
@@ -172,6 +176,8 @@ function deleteFood(index, food) {
 function updateEntry() {
     store.methods.updateFoodJournalEntry(state[currentDay]);
 }
+</script>
+
 
 function addToTotal(food) {
     state[currentDay].totalCarbs += food.carbs
@@ -190,6 +196,7 @@ function subFromTotal(food) {
 </script>
 
 
+
 <style scoped>
 #searchBar {
     position: absolute;
@@ -200,6 +207,7 @@ function subFromTotal(food) {
     padding-left: 80px;
 }
 
+
 #search {
     position: relative;
     top: 10px;
@@ -209,7 +217,9 @@ function subFromTotal(food) {
     top: 50px;
 }
 
+
 #macros {
     position: relative;
 }
 </style>
+

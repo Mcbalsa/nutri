@@ -18,9 +18,10 @@ public class Food {
     private String id;
 
     private String name;
+    private int calories;
     private int fat;
     private int protein;
     private int carbs;
-    private int servings;
+    private float servings;
     
 }
