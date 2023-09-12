@@ -104,8 +104,8 @@ onMounted(() => {
     height: 500px;
     width: 300px;
     position: absolute;
-    right: 10%;
-    top: 15%;
+    right: 100px;
+    top: 150px;
 }
 
 img {
