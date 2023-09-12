@@ -215,6 +215,7 @@ function subFromTotal(food) {
 
 #macros {
     position: relative;
+    width: 500px;
 }
 </style>
 
