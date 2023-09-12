@@ -6,7 +6,7 @@
                 <input id="username" class="form-control" v-model="state.servings" placeholder="Username">
             </div>
             <div class="mb-3">
-                <Button id="update" type="submit" label="Update journal" @click="setServing()" />
+                <Button id="update" label="Change serving size" @click="setServing()" />
             </div>
         </form>
     </div>
