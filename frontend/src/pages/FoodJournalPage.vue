@@ -41,15 +41,16 @@
                 </div>
                 <div class="col-auto">
                     <label for="fat">Fat</label>
-                    <h4 id="fat">{{ state[currentDay].totalFat }}</h4>
+                    <h4 id="fat">{{ state[currentDay].totalFat }}g</h4>
                 </div>
                 <div class="col-auto">
                     <label for="protein">Protein</label>
-                    <h4 id="protein">{{ state[currentDay].totalProtein }}</h4>
+                    <h4 id="protein">{{ state[currentDay].totalProtein }}g</h4>
                 </div>
                 <div class="col-auto">
                     <label for="carbs">Carbs</label>
-                    <h4 id="carbs">{{ state[currentDay].totalCarbs }}</h4>
+                    <h4 id="carbs">{{ state[currentDay].totalCarbs }}g</h4>
+
                 </div>
             </div>
             <DynamicDialog />
@@ -66,6 +67,7 @@ import DataTable from 'primevue/datatable';
 import { useDialog } from 'primevue/usedialog';
 import { inject, onMounted, provide, reactive } from 'vue';
 import FoodSearch from '../components/FoodSearch.vue';
+import Servings from '../components/Servings.vue';
 
 const store = inject('store')
 let search = "";
@@ -124,8 +126,7 @@ function changeServings(food) {
     });
 }
 
-
-function resetFood(food) {
+Food(food) {
     subFromTotal(food)
 
     food.fat /= food.servings
@@ -176,8 +177,6 @@ function deleteFood(index, food) {
 function updateEntry() {
     store.methods.updateFoodJournalEntry(state[currentDay]);
 }
-</script>
-
 
 function addToTotal(food) {
     state[currentDay].totalCarbs += food.carbs
@@ -195,8 +194,6 @@ function subFromTotal(food) {
 
 </script>
 
-
-
 <style scoped>
 #searchBar {
     position: absolute;
@@ -207,7 +204,6 @@ function subFromTotal(food) {
     padding-left: 80px;
 }
 
-
 #search {
     position: relative;
     top: 10px;
@@ -216,7 +212,6 @@ function subFromTotal(food) {
 #update {
     top: 50px;
 }
-
 
 #macros {
     position: relative;
