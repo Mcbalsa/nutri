@@ -71,6 +71,12 @@
 
 <script setup>
 
+
+import { inject, onMounted } from 'vue';
+
+const store = inject('store')
+
+
 import Button from 'primevue/button';
 import { inject, onMounted } from 'vue';
 const store = inject('store')
@@ -84,6 +90,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
 
 #header {
     padding-top: 25px;
@@ -133,4 +140,5 @@ h5 {
     position: relative;
     right: 565px;
 }
+
 </style>

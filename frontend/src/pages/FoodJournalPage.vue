@@ -50,6 +50,7 @@
                 <div class="col-auto">
                     <label for="carbs">Carbs</label>
                     <h4 id="carbs">{{ state[currentDay].totalCarbs }}g</h4>
+
                 </div>
             </div>
             <DynamicDialog />
@@ -125,7 +126,7 @@ function changeServings(food) {
     });
 }
 
-function resetFood(food) {
+Food(food) {
     subFromTotal(food)
 
     food.fat /= food.servings
@@ -193,7 +194,6 @@ function subFromTotal(food) {
 
 </script>
 
-
 <style scoped>
 #searchBar {
     position: absolute;
@@ -217,3 +217,4 @@ function subFromTotal(food) {
     position: relative;
 }
 </style>
+
