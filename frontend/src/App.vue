@@ -1,20 +1,17 @@
 <template>
-    <div>
+  <div>
     <nav>
       <div class="nav nav-tabs justify-content-end mb-4" role="tablist">
-        <a v-if="isAdmin()" class="nav-item nav-link" data-toggle="tab" @click="doRoute('AdminPage')"
-        role="tab">Admin</a>
-        <a class="nav-item nav-link" data-toggle="tab" @click="doRoute('FoodJournalPage')"
-        role="tab">Food</a>
-        <a class="nav-item nav-link" data-toggle="tab" @click="console.log('exersice')"
-        role="tab">Exercise</a>
+        <a v-if="isAdmin()" class="nav-item nav-link" data-toggle="tab" @click="doRoute('AdminPage')" role="tab">Admin</a>
+        <a class="nav-item nav-link" data-toggle="tab" @click="doRoute('FoodJournalPage')" role="tab">Food</a>
+        <a class="nav-item nav-link" data-toggle="tab" @click="console.log('exersice')" role="tab">Exercise</a>
         <a v-if="store.userState.person == null" class="nav-item nav-link" data-toggle="tab" @click="login()"
-        role="tab">Log In</a>
+          role="tab">Log In</a>
         <a v-if="store.userState.person != null" class="nav-item nav-link" data-toggle="tab" @click="logout()"
-        role="tab">Log Out</a>
+          role="tab">Log Out</a>
       </div>
     </nav>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -36,31 +33,29 @@ onMounted(() => {
 
 function login() {
   dialog.open(Login, {
-        props: {
-            header: 'Login',
-            style: {
-                width: '40vw',
-            },
-            breakpoints: {
-                '960px': '75vw',
-                '640px': '90vw'
-            },
-            modal: true,
-        },
-        onClose: () => {
-          // YYYY-MM-DD
-          const clientDate = new Date().toLocaleString( 'sv', { timeZoneName: 'short' } ).slice(0,10)
-          store.methods.isInFoodJournal(store.userState.person.id, clientDate)
-          store.methods.loadFoodJournal(store.userState.person.id)
-          if(isAdmin() == true) {
-    
-            router.push('/admin')
-          }
-          else {
-            router.push('/profile');
-          }
-        }
-    });
+    props: {
+      header: 'Login',
+      style: {
+        width: '40vw',
+      },
+      breakpoints: {
+        '960px': '75vw',
+        '640px': '90vw'
+      },
+      modal: true,
+    },
+    onClose: () => {
+      const clientDate = new Date().toLocaleString('sv', { timeZoneName: 'short' }).slice(0, 10)
+      store.methods.isInFoodJournal(store.userState.person.id, clientDate)
+      if (isAdmin() == true) {
+
+        router.push('/admin')
+      }
+      else {
+        router.push('/profile');
+      }
+    }
+  });
 }
 
 function logout() {
@@ -76,7 +71,7 @@ function isAdmin() {
 
 function doRoute(whereTo) {
   switch (whereTo) {
-    
+
     case 'HelloWorld':
       router.push('/hello');
       break;

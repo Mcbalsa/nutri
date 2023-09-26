@@ -75,8 +75,10 @@ import Button from 'primevue/button';
 import { inject, onMounted } from 'vue';
 const store = inject('store')
 
-onMounted(() => {
 
+onMounted(  () => {
+    const journal = store.foodJournal.value
+    console.log(journal)
 });
 
 

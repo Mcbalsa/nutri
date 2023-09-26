@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div style="width: 90%; margin: 0 auto;">
-            <DataTable :value="state[currentDay].foods" tableStyle="min-width: 50rem">
+        <div v-if="isLoading == false" style="width: 90%; margin: 0 auto;">
+            <DataTable  :value="state[currentDay].foods" tableStyle="min-width: 50rem">
                 <Column field="name" header="Name" style="width: 20%"></Column>
                 <Column field="servings" header="Servings" style="width: 20%"></Column>
                 <Column field="calories" header="Calories" style="width: 20%"></Column>
@@ -69,8 +69,9 @@ import FoodSearch from '../components/FoodSearch.vue';
 import Servings from '../components/Servings.vue';
 
 const store = inject('store')
+let isLoading = true;
 let search = "";
-let state = reactive(store.foodJournal.value)
+let state = reactive([])
 const dialog = useDialog();
 // Defaults to today, could be modified to fetch previous entries if implemented
 let currentDay = getToday()
@@ -79,9 +80,12 @@ provide('dialog', dialog);
 
 
 
-onMounted(() => {
+onMounted(async () => {
+    console.log("This should be loaded")
+    await store.methods.loadFoodJournal(store.userState.person.id)
     store.methods.loadFood()
-    store.methods.loadFoodJournal(store.userState.person.id)
+    state = store.foodJournal.value
+    isLoading = false
     console.log(state)
     console.log(state[currentDay])
 })

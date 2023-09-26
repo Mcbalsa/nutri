@@ -23,5 +23,5 @@ public class Food {
     private int protein;
     private int carbs;
     private float servings;
-    
+    private Address address;
 }
