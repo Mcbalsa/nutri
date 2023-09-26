@@ -30,5 +30,6 @@ public class FoodEntry {
     private int totalFat;
     private int totalProtein;
     private String userId;
+    
 
 }

@@ -31,6 +31,7 @@ public class FoodServiceImpl implements FoodService {
                         .protein(food.getProtein())
                         .calories(calcCalories(food.getFat(),food.getProtein(), food.getCarbs()))
                         .servings(1.0f)
+                        .address(food.getAddress())
                         .build()
 
         );
